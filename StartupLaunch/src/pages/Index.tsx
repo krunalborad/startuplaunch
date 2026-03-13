@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { HeroSection } from "@/components/HeroSection";
 import { StartupCard } from "@/components/StartupCard";
 import { Button } from "@/components/ui/button";
@@ -67,6 +68,7 @@ const mockStartups = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
   const [showAIAssistant, setShowAIAssistant] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const { toast } = useToast();
@@ -139,7 +141,7 @@ const Index = () => {
                   ].map((step, index) => (
                     <Card key={index} className="text-center hover:shadow-medium transition-all duration-300 animate-scale-in cursor-pointer group" onClick={() => {
                       const actions = ['/create', '/dashboard', '/discover', '/create'];
-                      window.location.href = actions[index];
+                      navigate(actions[index]);
                     }}>
                       <CardContent className="p-6">
                         <div className={`w-16 h-16 ${step.color} bg-current/10 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
@@ -241,7 +243,7 @@ const Index = () => {
                   <Button 
                     variant="outline" 
                     className="hidden md:flex mt-4"
-                    onClick={() => window.location.href = '/dashboard'}
+                    onClick={() => navigate("/dashboard")}
                   >
                     View All
                     <ArrowRight className="w-4 h-4 ml-2" />
@@ -283,7 +285,7 @@ const Index = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
                   {[
                     { number: "2.5K+", label: "Active Students", icon: Users, action: () => toast({ title: "👥 Active Community", description: "2,500+ students from 200+ universities worldwide!" }) },
-                    { number: "500+", label: "Ideas Shared", icon: Lightbulb, action: () => window.location.href = '/discover' },
+                    { number: "500+", label: "Ideas Shared", icon: Lightbulb, action: () => navigate("/discover")},
                     { number: "150+", label: "Teams Formed", icon: Target, action: () => toast({ title: "🤝 Teams", description: "150+ teams formed through our Smart Matching!" }) },
                     { number: "50+", label: "MVPs Built", icon: Zap, action: () => document.getElementById('success-stories')?.scrollIntoView({ behavior: 'smooth' }) }
                   ].map((stat, index) => (
@@ -301,7 +303,7 @@ const Index = () => {
                   size="lg" 
                   variant="gradient" 
                   className="animate-fade-in"
-                  onClick={() => window.location.href = '/dashboard'}
+                  onClick={() => navigate("/dashboard")}
                 >
                   Start Your Journey Today
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -342,13 +344,13 @@ const Index = () => {
                 AI Tools
               </button>
               <button 
-                onClick={() => window.location.href = '/startup-tv'}
+                onClick={() => navigate("/startup-tv")}
                 className="text-foreground font-medium hover:text-primary transition-colors"
               >
                 StartupTV
               </button>
               <button 
-                onClick={() => window.location.href = '/create'}
+                onClick={() => navigate("/create")}
                 className="text-foreground font-medium hover:text-primary transition-colors"
               >
                 Create Startup
@@ -360,7 +362,7 @@ const Index = () => {
                 <Bot className="w-4 h-4 mr-2" />
                 AI Assistant
               </Button>
-              <Button variant="gradient" onClick={() => window.location.href = '/dashboard'}>
+              <Button variant="gradient" onClick={() => navigate("/dashboard")}>
                 Get Started
               </Button>
             </div>
@@ -421,8 +423,8 @@ const Index = () => {
                 <button onClick={() => toast({ title: "🔒 Privacy Policy", description: "Your data is secure. We never share your information with third parties." })} className="hover:text-foreground transition-colors">Privacy</button>
                 <button onClick={() => toast({ title: "📜 Terms of Service", description: "By using StartupLaunch, you agree to our community guidelines." })} className="hover:text-foreground transition-colors">Terms</button>
                 <button onClick={() => toast({ title: "💬 Support", description: "Need help? Email us at support@startuplaunch.com or use the AI Assistant!" })} className="hover:text-foreground transition-colors">Support</button>
-                <button onClick={() => window.location.href = '/discover'} className="hover:text-foreground transition-colors">Discover</button>
-                <button onClick={() => window.location.href = '/dashboard'} className="hover:text-foreground transition-colors">Dashboard</button>
+                <button onClick={() => navigate("/discover")} className="hover:text-foreground transition-colors">Discover</button>
+                <button onClick={() => navigate("/dashboard")} className="hover:text-foreground transition-colors">Dashboard</button>
               </div>
             </div>
             
