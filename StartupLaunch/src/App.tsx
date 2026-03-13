@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Navigation } from "@/components/Navigation";
 import { AuthProvider } from "@/hooks/useAuth";
+
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import CreateStartup from "./pages/CreateStartup";
@@ -18,7 +19,6 @@ import Mentors from "./pages/Mentors";
 import Progress from "./pages/Progress";
 import StartupTV from "./pages/StartupTV";
 import SuccessStoryDetail from "./pages/SuccessStoryDetail";
-
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,11 +29,17 @@ const App = () => (
       <AuthProvider>
         <Toaster />
         <Sonner />
+
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Auth />} />
-            <Route path="/home" element={<Index />} />
+
+            {/* Landing Page */}
+            <Route path="/" element={<Index />} />
+
+            {/* Auth */}
             <Route path="/auth" element={<Auth />} />
+
+            {/* Main App Pages */}
             <Route path="/dashboard" element={<><Navigation /><Dashboard /></>} />
             <Route path="/create" element={<><Navigation /><CreateStartup /></>} />
             <Route path="/discover" element={<><Navigation /><Discover /></>} />
@@ -45,10 +51,13 @@ const App = () => (
             <Route path="/progress" element={<><Navigation /><Progress /></>} />
             <Route path="/startup-tv" element={<><Navigation /><StartupTV /></>} />
             <Route path="/success-story/:id" element={<><Navigation /><SuccessStoryDetail /></>} />
-            
+
+            {/* 404 */}
             <Route path="*" element={<NotFound />} />
+
           </Routes>
         </BrowserRouter>
+
       </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
